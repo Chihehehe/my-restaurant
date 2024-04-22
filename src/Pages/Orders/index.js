@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Space, Statistic, Typography, Table } from "antd";
+import { Space, Typography, Table } from "antd";
 import { getOrders } from "../../API";
 
 function Orders() {
