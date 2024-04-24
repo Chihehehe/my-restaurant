@@ -31,7 +31,7 @@ function EditMenu() {
                 },
                 {
                     title: "Price",
-                    dataIndex: "rating",
+                    dataIndex: "price",
                 },
                 {
                     title: "Category",
@@ -41,7 +41,7 @@ function EditMenu() {
                 loading={loading}
                 dataSource={dataSource}
                 pagination={{
-                    pageSize:6,
+                    pageSize:3,
                 }}
             ></Table>
         </Space>

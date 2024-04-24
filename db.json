@@ -70,5 +70,8 @@
           "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
         ]
       }
-    ]
+    ],
+    "total": 50,
+    "skip": 0,
+    "limit": 3
 }

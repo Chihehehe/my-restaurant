@@ -3,5 +3,5 @@ export const getOrders = ()=> {
 };
 
 export const getMenu = ()=> {
-    return fetch('https://dummyjson.com/products').then(res => res.json())
+    return fetch('http://localhost:3000/products').then(res => res.json())
 };
