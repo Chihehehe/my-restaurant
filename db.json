@@ -22,10 +22,7 @@
         "description": "Sprite, Coke, Fanta,... ",
         "price": 4.90,
         "category": "drink",
-        "thumbnail": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-        "images": [
-          "https://cdn.dummyjson.com/product-images/3/1.jpg"
-        ]
+        "thumbnail": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg"
       },
       {
         "id": 4,
