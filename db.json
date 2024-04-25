@@ -5,9 +5,6 @@
         "title": "Burrito",
         "description": "With rice, Jack cheese, black beans, salsa, and filling of your choice. Rolled in a flour tortilla.",
         "price": 18.6,
-        "discountPercentage": 10,
-        "rating": 4.69,
-        "stock": 94,
         "category": "main",
         "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
         "images": [
@@ -23,10 +20,6 @@
         "title": "Nachos",
         "description": "GYG's corn chips, melted Jack cheese, black beans, salsa, guacamole, and filling of your choice..",
         "price": 19.80,
-        "discountPercentage": 10,
-        "rating": 4.44,
-        "stock": 34,
-        "brand": "Apple",
         "category": "smartphones",
         "thumbnail": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
         "images": [
@@ -41,10 +34,6 @@
         "title": "Soft Drink",
         "description": "Sprite, Coke, Fanta,... ",
         "price": 4.90,
-        "discountPercentage": 10,
-        "rating": 4.09,
-        "stock": 36,
-        "brand": "Samsung",
         "category": "smartphones",
         "thumbnail": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
         "images": [
@@ -56,10 +45,6 @@
         "title": "Churros & Dulce De Leche",
         "description": "Churros rolled in cinnamon sugar and served with GYG's Dulce de Leche.",
         "price": 5.00,
-        "discountPercentage": 17.91,
-        "rating": 4.3,
-        "stock": 123,
-        "brand": "OPPO",
         "category": "smartphones",
         "thumbnail": "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg",
         "images": [
@@ -70,8 +55,5 @@
           "https://cdn.dummyjson.com/product-images/4/thumbnail.jpg"
         ]
       }
-    ],
-    "total": 50,
-    "skip": 0,
-    "limit": 3
+    ]
 }

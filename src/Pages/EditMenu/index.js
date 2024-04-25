@@ -61,7 +61,7 @@ function EditMenu() {
         setContent(<MenuForm showList={showList} />);
     }
 
-    return(
+    return (
         <Space direction='vertical'>
             {content}
         </Space>
@@ -73,33 +73,48 @@ function MenuList(props) {
 
     function fetchProducts() {
         fetch("http://localhost:3004/products'")
-        .then((response) => {
-            if(!response.ok) {
-                throw new Error("Unexpected Server Response");
-            }
-            return response.json()})
-        .then((data) => {
-            //console.log(data)
-            setProducts(data)
-        })
-        .catch((error) => console.log("Error: ", error));
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Unexpected Server Response");
+                }
+                return response.json()
+            })
+            .then((data) => {
+                //console.log(data)
+                setProducts(data)
+            })
+            .catch((error) => console.log("Error: ", error));
     }
 
     useEffect(() => fetchProducts(), []);
 
-    return(
-        <Space>
+    return (
+        <Space direction='vertical'>
             <Typography.Title level={3}>List of food</Typography.Title>
-            <Button onClick = {() => props.showForm()} type="primary">Create</Button>
-            <table className='table'>
+            {/* <Button onClick = {() => props.showForm()} type="primary">Create</Button> */}
+            <button type='button' className='btn btn-primary me-2'>Create</button>
+            <Space>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th></th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
 
-            </table>
+                </table>
+            </Space>
         </Space>
     );
 }
 
 function MenuForm(props) {
-    return(
+    return (
         <Space>
             <Typography.Title level={3}>Add more items</Typography.Title>
             <Button onClick={() => props.showList()} type="primary">Cancel</Button>
