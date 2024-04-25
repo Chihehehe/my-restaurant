@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Space, Typography, Table, Button } from "antd";
-import { getMenu } from "../../API";
+import { fetchProducts } from "../../API";
 
 
 //
@@ -71,54 +71,56 @@ function EditMenu() {
 function MenuList(props) {
     const [products, setProducts] = useState([]);
 
-    function fetchProducts() {
-        fetch("http://localhost:3004/products'")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Unexpected Server Response");
-                }
-                return response.json()
-            })
-            .then((data) => {
-                //console.log(data)
-                setProducts(data)
-            })
-            .catch((error) => console.log("Error: ", error));
-    }
-
-    useEffect(() => fetchProducts(), []);
+    useEffect(() => fetchProducts(setProducts), []);
 
     return (
-        <Space direction='vertical'>
+        <>
             <Typography.Title level={3}>List of food</Typography.Title>
-            {/* <Button onClick = {() => props.showForm()} type="primary">Create</Button> */}
-            <button type='button' className='btn btn-primary me-2'>Create</button>
-            <Space>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th></th>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
 
-                </table>
-            </Space>
-        </Space>
+            <button onClick={() => props.showForm()} type='button' className='btn btn-primary me-2'>Create</button>
+
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        products.map((product, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{product.id}</td>
+                                    <td>{product.title}</td>
+                                    <td>{product.description}</td>
+                                    <td>{product.price}$</td>
+                                    <td>{product.category}</td>
+                                    <td style={{ width: "10px", whiteSpace: "nowrap" }}>
+                                        <button type='button' className='btn btn-primary btn-sm me 2'>Edit</button>
+                                        <button type='button' className='btn btn-danger btn-sm'>Delete</button>
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    }
+                </tbody>
+
+            </table>
+        </>
     );
 }
 
 function MenuForm(props) {
     return (
-        <Space>
-            <Typography.Title level={3}>Add more items</Typography.Title>
-            <Button onClick={() => props.showList()} type="primary">Cancel</Button>
-        </Space>
+        <>
+            <Typography.Title level={3}>Create new products</Typography.Title>
+            <button onClick={() => props.showList()} type='button' className='btn btn-primary me-2'>Create</button>
+        </>
     );
 }
 
