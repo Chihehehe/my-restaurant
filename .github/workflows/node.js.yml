@@ -29,6 +29,9 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
       - name: Deploy with gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: crazy-max/ghaction-github-pages@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          target_branch: gh-pages
+          build_dir: build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
