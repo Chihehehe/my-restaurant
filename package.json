@@ -2,6 +2,7 @@
   "name": "my-restaurant",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://chihehehe.github.io/react-gh-pages",
   "dependencies": {
     "@ant-design/icons": "^5.3.5",
     "@testing-library/jest-dom": "^5.17.0",
