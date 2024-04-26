@@ -29,8 +29,6 @@ jobs:
       - run: npm run build --if-present
       - run: npm test
       - name: Deploy with gh-pages
-        run: |
-          git remote add origin https://github.com/chihehehe/react-gh-pages.git
-          npm run deploy -- -m "Deploy React app to GitHub Pages"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
