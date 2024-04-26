@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Typography, Table, Button } from "antd";
+import { Space, Typography } from "antd";
 import { fetchProducts } from "../../API";
 
 
