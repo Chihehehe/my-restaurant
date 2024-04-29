@@ -1,0 +1,178 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+model Account {
+    id                String  @id @default(cuid())
+    userId            String
+    resId             String
+    type              String
+    provider          String 
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    res              Restaurant   @relation(fields: [resId], references: [id], onDelete: Cascade)
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
+
+// User model representing the customers and staff of the app
+model User {
+    id               String           @id @default(cuid())
+    name             String?
+    email            String?          @unique
+    emailVerified    DateTime?
+    address          String?
+    accounts         Account[]
+    sessions         Session[]
+    role             Role             @default(CUSTOMER)
+    order            Order[]
+    sentReviews      Review[]         @relation("sentReviews")
+    payments         Payment[]
+    createdAt        DateTime         @default(now())
+    phoneNumber      String?
+    memberships      UserMembership[]
+    
+}
+enum Role {
+    ADMIN
+    CUSTOMER
+}
+
+
+model UserMembership {
+    user         User       @relation(fields: [userId], references: [id])
+    userId       String
+    membership   Membership @relation(fields: [membershipId], references: [id])
+    membershipId String
+    createdAt    DateTime   @default(now())
+    expiredAt    DateTime?
+    isAutoRenew  Boolean    @default(true)
+     @@id([userId, membershipId])
+}
+model Membership {
+    id        String           @id @default(cuid())
+    price     Float
+    duration  Int
+    createdAt DateTime         @default(now())
+    users     UserMembership[]
+}
+
+
+// Restaurant model
+model Restaurant {
+    id           String   @id @default(cuid())
+    name         String
+    address      String
+    phone        String?
+    email        String?  @unique
+    menuItems    MenuItem[]
+    accounts     Account[]
+    orders       Order[]
+    reviews      Review[]  @relation("receivedReviews")
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+}
+
+// Menu items that the restaurant offers
+model MenuItem {
+    id             String     @id @default(cuid())
+    name           String
+    description    String?
+    price          Float
+    available      Boolean    @default(true)
+    restaurantId   String
+    restaurant     Restaurant @relation(fields: [restaurantId], references: [id])
+    orderItems     OrderItem[]
+}
+
+
+// Orders placed by users
+model Order {
+    id             String      @id @default(cuid())
+    userId         String
+    user           User        @relation(fields: [userId], references: [id])
+    restaurantId   String
+    restaurant     Restaurant  @relation(fields: [restaurantId], references: [id])
+    orderItems     OrderItem[]
+    total          Float
+    status         OrderStatus @default(PENDING)
+    datetime       DateTime    @default(now())
+    deliveredAddress    String
+    assign_driver   String
+    restaurant_rate String
+    @@unique([ userId])
+}
+
+// Enum for order status
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+// Items within an order
+model OrderItem {
+    id           String    @id @default(cuid())
+    orderId      String
+    order        Order     @relation(fields: [orderId], references: [id])
+    menuItemId   String
+    menuItem     MenuItem  @relation(fields: [menuItemId], references: [id])
+    quantity     Int
+    subtotal     Float     @default(0)
+}
+
+// Reviews given by users for restaurants
+model Review {
+    id           String     @id @default(cuid())
+    content      String?
+    rating       Int
+    userId       String
+    user         User       @relation(name: "sentReviews",fields: [userId], references: [id])
+    restaurantId String
+    restaurant   Restaurant @relation(name: "receivedReviews",fields: [restaurantId], references: [id])
+    createdAt    DateTime   @default(now())
+}
+// Payment by users 
+model Payment {
+    id            String        @id @default(cuid())
+    amount        Float
+    createdAt     DateTime      @default(now())
+    paymentStatus PaymentStatus
+    User          User?         @relation(fields: [userId], references: [id])
+    userId        String?
+}
+enum PaymentStatus {
+    PENDING
+    COMPLETED
+    DECLINED
+    CANCELLED
+}
+
+
