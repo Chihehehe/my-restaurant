@@ -1,5 +1,6 @@
 import express from "express"
 import mysql from "mysql"
+import cors from "cors"
 
 const app = express()
 
@@ -12,6 +13,8 @@ const db = mysql.createConnection({
 
 //allow to sen any json file as client
 app.use(express.json())
+app.use(cors())
+
 
 app.get("/", (req,res) => {
     res.json("hello this is the backend")
@@ -37,7 +40,17 @@ app.post("/editmenu", (req, res) => {
     db.query(q, [values], (err,data) => {
         if(err) return res.json(err)
         return res.json("Food has been created successfully");    
-    })
+    });
+});
+
+app.delete("/editmenu/:idmenu", (req,res) => {
+    const menuId = req.params.idmenu;
+    const q = "DELETE FROM menu WHERE idmenu = ?"
+
+    db.query(q, [menuId], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("Food has been deleted successfully");    
+    });
 })
 
 app.listen(8800, () => {
