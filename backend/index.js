@@ -20,6 +20,7 @@ app.get("/", (req,res) => {
     res.json("hello this is the backend")
 })
 
+//For restaurant
 app.get("/editmenu", (req, res) => {
     const q = "SELECT * FROM menu"
     db.query(q, (err, data) => {
@@ -52,6 +53,11 @@ app.delete("/editmenu/:idmenu", (req,res) => {
         return res.json("Food has been deleted successfully");    
     });
 })
+
+
+
+
+//For customer
 
 app.listen(8800, () => {
     console.log("Connect to backend!")
