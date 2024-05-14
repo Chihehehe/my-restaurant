@@ -1,0 +1,19 @@
+.res_display {
+    margin: 2rem 100px 0px 18rem;
+}
+
+.res_display h1 {
+    font-size: max(2vw, 24px);
+    font-weight: 600;
+}
+
+.res_display_list {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    /* grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); */
+    flex-wrap: wrap;
+    margin-top: 30px;
+    gap: 30px;
+    row-gap: 50px;
+}
