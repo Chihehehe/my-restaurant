@@ -54,6 +54,38 @@ app.delete("/editmenu/:idmenu", (req,res) => {
     });
 })
 
+app.post('/signup', (req, res) => {
+    const q = "INSERT INTO customer (`name`,`phone`,`gmail`,`password`,`membership`) VALUES (?)";
+    const values = [
+        req.body.name,
+        req.body.phone,
+        req.body.gmail,
+        req.body.password,
+        0
+    ];
+
+    db.query(q, [values], (err,data) => {
+        if(err) return res.json(err)
+        return res.json("Customer has been created successfully");    
+    });
+})
+
+app.post('/login', (req, res) => {
+    console.log(req.body);
+    const q = "SELECT * FROM customer WHERE gmail = ? AND password = ?";
+    db.query(q, [req.body.gmail, req.body.password], (err, data) => {
+            if (err) {
+                console.error(err);
+                return res.json("Error");
+            }
+            if (data.length > 0) {
+                return res.json("Success");
+            } else {
+                return res.json("Failed");
+            }
+        })
+});
+
 
 
 
