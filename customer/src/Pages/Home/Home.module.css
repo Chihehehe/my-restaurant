@@ -1,0 +1,113 @@
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .list li a {
+    height: 22.5rem;
+    width: 20rem;
+    border: 1px solid whitesmoke;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #486c3d;
+  }
+  
+  .image {
+    object-fit: cover;
+    height: 14.5rem;
+    border-radius: 10px;
+  }
+  
+  .content {
+    margin-top: 0.3rem;
+    padding: 0.5rem 1rem;
+    position: relative;
+    height: 7rem;
+  }
+
+  .stars {
+    margin-top: 0.3rem;
+    padding: 0.5rem 1rem;
+    position: relative;
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .name {
+    font-size: 20px; 
+    font-weight: bold;
+}
+
+a:link { 
+    text-decoration: none; 
+  } 
+
+.categoryBar {
+    padding-top: 20px;
+    width: 300px; /* Set the width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+    margin-bottom: 30px;
+}
+
+.sortByPriceContainer {
+  margin-top: 20px; /* Add margin top to create space */
+  margin-left: 110px; /* Add margin left to create space from the left side */
+  margin-bottom: 10px;
+}
+
+h1{
+  margin-left: 40px;
+}
+
+label {
+  margin-right: 10px; /* Add margin between label and select */
+}
+
+select {
+  padding: 5px; /* Add padding to select box */
+}
+
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.searchContainer input {
+  border-radius: 10rem 0 0 10rem;
+  border: none;
+  height: 3rem;
+  width: 20rem;
+  background-color: #f1f1f1;
+  padding: 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.searchContainer button {
+  color: grey;
+  height: 3rem;
+  width: 5rem;
+  font-size: 1rem;
+  border-radius: 0 10rem 10rem 0;
+  border: none;
+  background-color: #32711f;
+  color: white;
+  opacity: 0.8;
+  outline: none;
+}
+
+.searchContainer button:hover {
+  opacity: 1;
+  cursor: pointer;
+}

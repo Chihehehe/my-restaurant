@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Validation from './LoginValidation';
 import axios from 'axios'
 
@@ -26,7 +26,7 @@ function Login() {
               })
             .then(res => {
                 if(res.data === "Success") {
-                    navigate("/home");
+                    navigate("/*");
                 } else {
                     alert("No record existed");
                     console.log(values)

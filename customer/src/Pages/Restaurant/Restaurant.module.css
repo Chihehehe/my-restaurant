@@ -1,0 +1,92 @@
+.imageContainer {
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly */
+    align-items: center;
+    height: 55.666vh; /* Two-thirds of the viewport height */
+    margin: auto;
+    overflow: hidden; /* Ensure the image is cropped */
+    max-width: 95%;
+    border-radius: 10px;
+  }
+  
+  .imageContainer img {
+    min-width: 1160px;
+    min-height: 100%; /* Ensure the image covers the container */
+    object-fit: cover; /* Crop the image while maintaining aspect ratio */
+    border-radius: 10px; /* Apply border-radius to make the images round */
+  }
+  
+  
+  .restaurantContainer {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .info {
+    padding-top: 10px;
+    padding-left: 130px;
+  }
+  
+
+.restaurantName {
+    font-size: 44px; 
+    font-weight: bold;
+    width: 100%; /* Ensure name spans full width */
+  }
+
+.star{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.restaurantInfo {
+    display: flex;
+}
+
+p {
+    margin-right: 10px;
+}
+  
+.title {
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item_card {
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.item_image {
+    margin-right: 19px;
+    padding: 10px;
+}
+
+.item_title {
+    font-size: 18px;
+}
+
+.item_description {
+    margin-top: 8px;
+    color: #718096;
+}
+
+.item_price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #32711f;
+}
+
+.add_button {
+    margin-left: auto;
+}
+
+
+
+
+
