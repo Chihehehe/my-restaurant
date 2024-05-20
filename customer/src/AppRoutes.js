@@ -3,14 +3,17 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './Pages/Home/HomePage'
 import Restaurant from './Pages/Restaurant/Restaurant'
 import CartPage from './Pages/Cart/CartPage';
+import Header from './Components/Header/Header'; // Import the Header component
 
-function AppRoutes() {
+function AppRoutes(handleClick = { handleClick }) {
   return (
-    <Routes>
-        <Route path="/*" element={<HomePage />} />
-        <Route path="/restaurants/:id" element = {<Restaurant />} />
-        <Route path="cart" element={<CartPage />} />
-    </Routes>
+
+    <Route path="/:id/*" element={<>
+      <Header handleClick={handleClick} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/restaurants/:id" element={<Restaurant handleClick={handleClick} />} />
+      <Route path="/cart" element={<CartPage />} />
+    </>} />
   );
 }
 

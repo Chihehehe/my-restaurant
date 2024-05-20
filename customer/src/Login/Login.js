@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Validation from './LoginValidation';
 import axios from 'axios'
 
+
 function Login() {
     const [values, setValues] = useState({
         email: '',
@@ -25,8 +26,9 @@ function Login() {
                 password: values.password.toString(), // Convert password to string
               })
             .then(res => {
-                if(res.data === "Success") {
-                    navigate("/*");
+                if(res.data.status === "Success") {
+                    const userId = res.data.userId;
+                    navigate(`/${userId}`);
                 } else {
                     alert("No record existed");
                     console.log(values)

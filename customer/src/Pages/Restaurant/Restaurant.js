@@ -5,7 +5,7 @@ import axios from 'axios';
 import { StarFilled } from '@ant-design/icons';
 import { Text, Box, Flex, Heading, Image, Button, SimpleGrid } from "@chakra-ui/react";
 
-function Restaurant() {
+function Restaurant({ handleClick }) {
   const [restaurant, setRestaurant] = useState();
   const { id } = useParams();
   const [menu, setMenu] = useState([]);
@@ -32,6 +32,10 @@ function Restaurant() {
       })
       .catch((err) => console.log(err));
   }, [id]);
+
+  // const handleClick = (item) => {
+  //   let isPresent = false;
+  // }
 
 
   return (
@@ -60,7 +64,7 @@ function Restaurant() {
             <div>
               <SimpleGrid columns={2} spacing={8} maxW="1200px" mx="auto">
                 {menu.map(item => (
-                  <Flex key={item.idRest} className={classes.item_card} p={5} shadow="md" borderWidth="1px" borderRadius="md">
+                  <Flex key={item.idmenu} className={classes.item_card} p={5} shadow="md" borderWidth="1px" borderRadius="md">
                     {/* Image on the right */}
                     <Box className={classes.item_image} mr={4}>
                       <Box mb={4}>
@@ -87,7 +91,9 @@ function Restaurant() {
                           <Text className={classes.item_price} fontSize="lg" fontWeight="bold">${item.price}</Text>
                         </Box>
                         <Box className={classes.add_button}>
-                          <Button style={{ backgroundColor: "#32711f", color: "white", width: "60px", borderRadius: "5px", height: "30px", borderColor: "#83b67f" }}>Add</Button>
+                          <Button
+                            onClick={() => handleClick(item)}
+                            style={{ backgroundColor: "#32711f", color: "white", width: "60px", borderRadius: "5px", height: "30px", borderColor: "#83b67f" }}>Add</Button>
                         </Box>
                       </Flex>
                     </Flex>

@@ -15,7 +15,7 @@ const HomePage = () => {
     useEffect(() => {
         const fetchAllRestaurants = async () => {
             try {
-                const res = await axios.get("http://localhost:8800/restaurants")
+                const res = await axios.get("http://localhost:8800/:id/restaurants")
                 setRestaurants(res.data);
             } catch (err) {
                 console.log(err)
@@ -101,9 +101,9 @@ const HomePage = () => {
             </div>
 
             <ul className={classes.list}>
-                {filterRestaurants.map(restaurant => (
-                    <li key={restaurant.idrestaurant}>
-                        <Link to={`/restaurants/${restaurant.idrestaurant}`}>
+                {filterRestaurants.map((restaurant,index) => (
+                    <li key={index}>
+                        <Link to={`/{$id}/restaurants/${restaurant.idrestaurant}`}>
                             {restaurant.image && <img src={restaurant.image} width={320} height={200} alt="" />}
                             <div className={classes.content}>
                                 <div className={classes.name}>{restaurant.restName}</div>

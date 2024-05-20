@@ -5,6 +5,10 @@ import Signup from './Login/Signup';
 import Header from './Components/Header/Header'; // Import the Header component
 import AppRoutes from './AppRoutes';
 
+const handleClick = (item) => {
+  console.log(item)
+}
+
 function App() {
   return (
     <Routes>
@@ -13,10 +17,7 @@ function App() {
       <Route path="/signup" element={<Signup />} />
 
       {/* Route with the Header */}
-      <Route path="/*" element={<>
-        <Header /> 
-        <AppRoutes />
-      </>} />
+      <AppRoutes />
     </Routes>
   );
 }

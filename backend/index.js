@@ -21,6 +21,14 @@ app.get("/", (req, res) => {
 })
 
 //For restaurant
+app.get("/restpage", (req, res) => {
+    const q = "SELECT * FROM restaurant"
+    db.query(q, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
 app.get("/editmenu", (req, res) => {
     const q = "SELECT * FROM menu"
     db.query(q, (err, data) => {
@@ -28,6 +36,8 @@ app.get("/editmenu", (req, res) => {
         return res.json(data)
     })
 })
+
+
 
 app.post("/editmenu", (req, res) => {
     const q = "INSERT INTO menu (`foodName`, `desc`, `price`, `image`) VALUES (?)"
@@ -80,18 +90,40 @@ app.post('/login', (req, res) => {
             return res.json("Error");
         }
         if (data.length > 0) {
-            return res.json("Success");
+            const user = data[0]
+            return res.json({status: "Success", userId: user.idCustomer});
         } else {
             return res.json("Failed");
         }
     })
 });
 
+app.get("/:id", (req, res) => {
+    const q = "SELECT * FROM customer"
+    db.query(q, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+
 
 
 
 //For customer
-app.get("/restaurants", (req, res) => {
+app.get("/customer/:id", (req, res) => {
+    const userId = req.params.id;
+    const q = "SELECT * FROM customer WHERE idCustomer = ?"; // Adjust the column name if necessary
+    db.query(q, [userId], (err, data) => {
+        if (err) {
+            console.error('Error fetching customer:', err);
+            return res.json(err);
+        }
+        return res.json(data);
+    });
+});
+
+app.get("/:id/restaurants", (req, res) => {
     const q = "SELECT * FROM restaurant"
     db.query(q, (err, data) => {
         if (err) return res.json(err)
