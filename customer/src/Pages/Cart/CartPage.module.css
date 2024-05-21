@@ -1,0 +1,116 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+article{
+    width: 60%;
+    margin: auto;
+}
+.cartBox img{
+    width: 200px;
+    height: 120px;
+}
+.cart_img{
+    display: flex;
+    width: 400px;
+}
+.cart_img p {
+    font-weight: bold;
+    margin-left: 10px;
+}
+.cartBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    border-bottom: 2px solid skyblue;
+    padding-bottom: 5px;
+}
+.cartBox div:nth-child(2) button{
+    padding: 5px 10px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.cartBox div:nth-child(3) button{
+    padding: 5px 10px;
+    font-weight: semi-bold;
+    letter-spacing: 2px;
+    border:none;
+    outline: none;
+    color: white;
+    background-color: rgb(158, 23, 23);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.cartBox div:nth-child(3) button:hover{
+    background-color: darkseagreen;
+}
+.cartBox div:nth-child(3) span{
+    background-color: #126a2f2f;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+}
+.total span:nth-child(1){
+    font-size: 2rem;
+    color: skyblue;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.total span:nth-child(2){
+    font-size: 2rem;
+    color: #919b23;
+    font-weight: bold;
+}
+
+.checkout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 3;
+    height: 13rem;
+    border: 1px solid #51631a;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  .checkout > div {
+    font-size: 1.4rem;
+    margin: 1rem;
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .total_price {
+    font-weight: bold;
+    justify-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .checkout a {
+    padding: 1rem;
+    color: white;
+    background: #126a2f;
+    display: block;
+    width: 99%;
+    border-radius: 1rem;
+    text-align: center;
+    justify-self: center;
+  }
+  
+  .checkout a:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }

@@ -131,23 +131,22 @@ app.get("/:id/restaurants", (req, res) => {
     })
 })
 
-app.get("/restaurants/:id", (req, res) => {
-    const q = "SELECT * FROM restaurant WHERE idrestaurant = ?";
-    const id = req.params.id;
-
-    db.query(q, [id], (err, data) => {
+app.get("/:id/restaurants/:idrestaurant", (req, res) => {
+    const idrestaurant = req.params.idrestaurant;
+    const q = "SELECT * FROM restaurant where idrestaurant = ?"
+    db.query(q, [idrestaurant], (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
     })
 })
 
 //Menu for each restaurant
-app.get('/restaurants/:id/menu', (req, res) => {
-    const restaurantId = req.params.id;
+app.get('/:id/restaurants/:idrestaurant/menu', (req, res) => {
+    const idrestaurant = req.params.idrestaurant;
     const sql = `SELECT * FROM menu
                  WHERE idRest = ?`;
 
-    db.query(sql, [restaurantId], (err, results) => {
+    db.query(sql, [idrestaurant], (err, results) => {
         if (err) {
             res.status(500).send('Error retrieving menu data');
         } else {

@@ -1,49 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import classes from "./CartPage.module.css"
+import { Link, useParams } from 'react-router-dom';
 
-function ShoppingCart() {
-    const [cartItems, setCartItems] = useState([]);
+function CartPage({ cart, setCart, handleChange }) {
+    const [price, setPrice] = useState(0);
+    const {id} = useParams();
 
-    // Function to add an item to the cart
-    const addItemToCart = (item) => {
-        // Check if the item already exists in the cart
-        const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    const handlePrice = () => {
+        let ans = 0;
+        cart.map((item) => (
+            ans += item.amount * item.price
+        ))
+        setPrice(ans);
+    }
 
-        if (existingItem) {
-            // If item exists, update its quantity
-            setCartItems(
-                cartItems.map((cartItem) =>
-                    cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
-                )
-            );
-        } else {
-            // If item doesn't exist, add it to the cart with quantity 1
-            setCartItems([...cartItems, { ...item, quantity: 1 }]);
-        }
-    };
+    const handleRemove = (idmenu) => {
+        const arr = cart.filter((item) => item.idmenu != idmenu);
+        setCart(arr);
+    }
 
-    // Function to remove an item from the cart
-    const removeItemFromCart = (itemId) => {
-        setCartItems(cartItems.filter((item) => item.id !== itemId));
-    };
+    useEffect(() => {
+        handlePrice();
+    })
 
-    // Function to update quantity of an item in the cart
-    const updateItemQuantity = (itemId, newQuantity) => {
-        setCartItems(
-            cartItems.map((item) => (item.id === itemId ? { ...item, quantity: newQuantity } : item))
-        );
-    };
-
-    // Calculate total price of items in the cart
-    const calculateTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    };
+    console.log(id)
 
     return (
-        <div>
-            {/* Render items in the cart */}
-            {/* Render total price */}
-        </div>
+        <article>
+            {cart.length > 0 ? (
+                cart.map((item) => (
+                    <div className={classes.cartBox} key={item.idmenu}>
+                        <div className={classes.cart_img}>
+                            <img src={item.image} alt={item.foodName} />
+                            <p>{item.foodName}</p>
+                        </div>
+                        <div>
+                            <button onClick={() => handleChange(item, +1)}> + </button>
+                            <button>{item.amount}</button>
+                            <button onClick={() => handleChange(item, -1)}> - </button>
+                        </div>
+                        <div>
+                            <span>${item.price}</span>
+                            <button onClick={() => handleRemove(item.idmenu)}>Remove</button>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <p>Your cart is empty.</p>
+            )}
+            <div className={classes.checkout}>
+                <div>
+                    <span>Total Price of your Cart: </span>
+                    <span className={classes.total_price}> ${price}</span>
+                </div>
+                <Link to={`/${id}/checkout`} state={{ cart }} >Proceed To Checkout</Link>
+            </div>
+        </article>
     );
 }
 
-export default ShoppingCart;
+export default CartPage

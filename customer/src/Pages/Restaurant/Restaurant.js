@@ -7,12 +7,12 @@ import { Text, Box, Flex, Heading, Image, Button, SimpleGrid } from "@chakra-ui/
 
 function Restaurant({ handleClick }) {
   const [restaurant, setRestaurant] = useState();
-  const { id } = useParams();
+  const { id, idrestaurant } = useParams();
   const [menu, setMenu] = useState([]);
 
   useEffect(() => {
-    console.log("Fetching data id:", id);
-    axios.get(`http://localhost:8800/restaurants/` + id)
+    console.log("Fetching rest data id:", idrestaurant);
+    axios.get(`http://localhost:8800/${id}/restaurants/` + idrestaurant)
       .then((res) => {
         console.log('Data fetched:', res.data);
         if (res.data.length > 0) {
@@ -23,9 +23,9 @@ function Restaurant({ handleClick }) {
       })
       .catch(err => console.log(err))
 
-    console.log('Fetching menu data for restaurant id:', id);
+    console.log('Fetching menu data for restaurant id:', idrestaurant);
     axios
-      .get(`http://localhost:8800/restaurants/${id}/menu`)
+      .get(`http://localhost:8800/${id}/restaurants/${idrestaurant}/menu`)
       .then((res) => {
         console.log('Menu data fetched:', res.data);
         setMenu(res.data); // Set the menu data in state

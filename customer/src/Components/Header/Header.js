@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Restaurant from '../../Pages/Restaurant/Restaurant';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
-export default function Header() {
+export default function Header({size}) {
     // const user = {
     //     name: 'Chi',
     // };
@@ -27,10 +28,6 @@ export default function Header() {
             .catch(err => console.log(err))
     }, [id]);
 
-    const [cart, setCart] = useState([]);
-    const handleClick = (item) => {
-        let isPresent = false;
-    }
 
     const logout = () => { }
 
@@ -55,9 +52,9 @@ export default function Header() {
 
                     <li>
                         <Link to={`/${id}/cart`}>
-                            Cart
+                            <ShoppingCartOutlined />
                             {/* {cart.totalCount > 0 && <span>{cart.length}</span>} */}
-                            {cart.length}
+                            {size}
                         </Link>
                     </li>
                 </ul>
