@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import classes from './CheckoutPage.module.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutPage() {
   const location = useLocation();
@@ -12,6 +13,8 @@ function CheckoutPage() {
   const [serviceFee, setServiceFee] = useState(10.00); // Example fee
   const [restaurantDiscount, setRestaurantDiscount] = useState(0.10); // 10% discount
   const [membershipDiscount, setMembershipDiscount] = useState(0.20); // 20% discount on service fee
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     console.log("Fetching data id:", id);
@@ -27,14 +30,11 @@ function CheckoutPage() {
       .catch(err => console.log(err));
   }, [id]);
 
-  const handleCheckout = () => {
-    // Logic for processing checkout (e.g., sending data to backend)
-    alert('Checkout completed successfully!');
-  };
 
   if (!user) {
     return <div>Loading...</div>;
   }
+
 
   const subtotal = cart.reduce((total, item) => total + item.amount * item.price, 0);
   const discountAmount = subtotal * restaurantDiscount;
@@ -49,6 +49,50 @@ function CheckoutPage() {
   }
 
   const total = (subtotal - discountAmount) + deliveryFee + totalServiceFee;
+
+
+  const insertOrderData = async (orderData) => {
+    try {
+      const response = await axios.post(`http://localhost:8800/${id}/orders`, orderData);
+      console.log('Order inserted:', response.data);
+      // Handle success case
+    } catch (error) {
+      console.error('Error inserting order:', error);
+      // Handle error case
+    }
+  };
+
+  console.log('Cart data: ', cart)
+
+  const handleCheckout = () => {
+    const created_at = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+    // Prepare the order data
+    const orderData = {
+      iduser: id, // Assuming the user object has an `idCustomer` property
+      idrest: cart[0].idRest, // Assuming the cart items have an `idrestaurant` property
+      totalAmount: total,
+      status: 'pending',
+      created_at: created_at,
+      items: cart.map((item) => ({
+        idfood: item.idmenu, // Assuming the cart items have an `idmenu` property
+        quantity: item.amount,
+        price: item.price,
+        foodName: item.foodName
+      })),
+    };
+
+    console.log('Order Data:', orderData);
+
+    // Insert the order data
+    insertOrderData(orderData);
+
+    // Show the alert and navigate to the "/OrderHistory" page after 3 seconds
+    setTimeout(() => {
+      alert('Your order is waiting to be accepted. View your order here');
+      navigate(`/${id}/OrderHistory`);
+    }, 3000);
+  };
 
   return (
     <div className={classes.checkoutContainer}>

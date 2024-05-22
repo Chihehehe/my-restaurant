@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { StarFilled } from "@ant-design/icons";
+import { StarFilled, ShopOutlined } from "@ant-design/icons";
 import classes from "./Home.module.css";
 import { Link, useParams } from 'react-router-dom';
 import Select from 'react-select';
@@ -12,6 +12,7 @@ const HomePage = () => {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [user, setUser] = useState(null);
     const { id } = useParams();
+    const [originalRestaurants, setOriginalRestaurants] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8800/customer/${id}`)
@@ -30,6 +31,7 @@ const HomePage = () => {
             try {
                 const res = await axios.get(`http://localhost:8800/customer/${id}/restaurants`);
                 if (Array.isArray(res.data)) {
+                    setOriginalRestaurants(res.data);
                     setRestaurants(res.data);
                 } else {
                     console.error("API response is not an array", res.data);
@@ -68,15 +70,23 @@ const HomePage = () => {
         setRestaurants(restCopy);
     };
 
-    const search = (event) => {
-        const matchedRest = restaurants.filter((restaurant) => {
-            return restaurant.addressRes
-                .toLowerCase()
-                .includes(event.target.value.toLowerCase());
-        });
+    const sortByNearestLocation = () => {
+        const restCopy = [...restaurants];
+        restCopy.sort((restA, restB) => restA.distance - restB.distance);
+        setRestaurants(restCopy);
+    };
 
-        setSearchPhrase(event.target.value);
-        setRestaurants(matchedRest);
+    const search = (event) => {
+        const searchValue = event.target.value.toLowerCase();
+        if (searchValue.trim() === '') {
+            setRestaurants([...originalRestaurants]); // Reset to original list
+        } else {
+            const matchedRest = originalRestaurants.filter((restaurant) => {
+                return restaurant.restName.toLowerCase().includes(searchValue);
+            });
+            setRestaurants(matchedRest);
+        }
+        setSearchPhrase(searchValue); // Update search phrase
     };
 
     return (
@@ -84,7 +94,7 @@ const HomePage = () => {
             <div className={classes.searchContainer}>
                 <input
                     type="text"
-                    placeholder='Search by address'
+                    placeholder='Search by restaurant name'
                     value={searchPhrase}
                     onChange={search}
                 />
@@ -108,6 +118,9 @@ const HomePage = () => {
                     <option value="lowToHigh">Low to High</option>
                 </select>
             </div>
+            <div className={classes.sortBy}>
+                <button className={classes.sortByLocationButton} onClick={sortByNearestLocation}>Sort by Nearest Location</button>
+            </div>
 
             {Array.isArray(filterRestaurants) && filterRestaurants.length > 0 ? (
                 <ul className={classes.list}>
@@ -118,10 +131,12 @@ const HomePage = () => {
                                 <div className={classes.content}>
                                     <div className={classes.name}>{restaurant.restName}</div>
                                     <p>{restaurant.addressRes}</p>
-                                    <p>Distance: {restaurant.distance.toFixed(2)} km</p>
                                 </div>
-                                <div className={classes.stars}>
-                                    {restaurant.Ratings} <StarFilled style={{ fontSize: '15px', color: '#FFD700' }} />
+                                <div className={classes.footerBox}>
+                                    <div> <ShopOutlined /> {restaurant.distance.toFixed(2)} km</div>
+                                    <div className={classes.stars}>
+                                        {restaurant.Ratings} <StarFilled style={{ fontSize: '15px', color: '#FFD700' }} />
+                                    </div>
                                 </div>
                             </Link>
                         </li>
@@ -129,8 +144,9 @@ const HomePage = () => {
                 </ul>
             ) : (
                 <p>No restaurants found</p>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 };
 

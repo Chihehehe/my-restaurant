@@ -26,16 +26,16 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     const dLat = deg2rad(lat2 - lat1); // deg2rad below
     const dLon = deg2rad(lon2 - lon1);
     const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const d = R * c; // Distance in km
     return d;
-  }
-  
-  function deg2rad(deg) {
+}
+
+function deg2rad(deg) {
     return deg * (Math.PI / 180);
-  }
+}
 
 //For restaurant
 app.get("/restpage", (req, res) => {
@@ -108,7 +108,7 @@ app.post('/login', (req, res) => {
         }
         if (data.length > 0) {
             const user = data[0]
-            return res.json({status: "Success", userId: user.idCustomer});
+            return res.json({ status: "Success", userId: user.idCustomer });
         } else {
             return res.json("Failed");
         }
@@ -141,38 +141,39 @@ app.get("/customer/:id", (req, res) => {
 app.get("/customer/:id/restaurants", (req, res) => {
     const userId = req.params.id;
     const qCustomer = "SELECT * FROM customer WHERE idCustomer = ?";
-    
+
     db.query(qCustomer, [userId], (err, customerData) => {
-      if (err) {
-        console.error('Error fetching customer:', err);
-        return res.json(err);
-      }
-      const customer = customerData[0];
-      const qRestaurants = "SELECT * FROM restaurant";
-      
-      db.query(qRestaurants, (err, restaurantData) => {
         if (err) {
-          console.error('Error fetching restaurants:', err);
-          return res.json(err);
+            console.error('Error fetching customer:', err);
+            return res.json(err);
         }
-        
-        const enhancedRestaurants = restaurantData.map(restaurant => {
-          const distance = getDistanceFromLatLonInKm(
-            customer.custLat,
-            customer.custLon,
-            restaurant.lat,
-            restaurant.lon
-          );
-          return {
-            ...restaurant,
-            distance
-          };
+        const customer = customerData[0];
+        const qRestaurants = "SELECT * FROM restaurant";
+
+        db.query(qRestaurants, (err, restaurantData) => {
+            if (err) {
+                console.error('Error fetching restaurants:', err);
+                return res.json(err);
+            }
+
+            const enhancedRestaurants = restaurantData.map(restaurant => {
+                const distance = getDistanceFromLatLonInKm(
+                    customer.custLat,
+                    customer.custLon,
+                    restaurant.lat,
+                    restaurant.lon
+                );
+                return {
+                    ...restaurant,
+                    distance
+                };
+            });
+
+            return res.json(enhancedRestaurants);
         });
-        
-        return res.json(enhancedRestaurants);
-      });
     });
-  });
+});
+
 
 app.get("/:id/restaurants/:idrestaurant", (req, res) => {
     const idrestaurant = req.params.idrestaurant;
@@ -201,37 +202,161 @@ app.get('/:id/restaurants/:idrestaurant/menu', (req, res) => {
 app.put('/customer/:id/membership', (req, res) => {
     const userId = req.params.id;
     const { membership } = req.body;
-  
+
     const sql = 'UPDATE customer SET membership = ? WHERE idCustomer = ?';
     db.query(sql, [membership, userId], (err, result) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      res.send({ success: true, message: 'Membership updated successfully' });
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.send({ success: true, message: 'Membership updated successfully' });
     });
-  });
+});
 
-  // Update customer details
-  app.put('/customer/:id', (req, res) => {
+// Update customer details
+app.put('/customer/:id', (req, res) => {
     const { id } = req.params;
     const values = [
-      req.body.name,
-      req.body.phone,
-      req.body.gmail,
-      id // Add the id parameter to the values array
+        req.body.name,
+        req.body.phone,
+        req.body.gmail,
+        id // Add the id parameter to the values array
     ];
-  
+
     const query = 'UPDATE customer SET name = ?, phone = ?, gmail = ? WHERE (idCustomer = ?)';
-  
+
     db.query(query, values, (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Database error' });
-      }
-      res.status(200).json({ message: 'Customer details updated successfully' });
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.status(200).json({ message: 'Customer details updated successfully' });
     });
-  });
+});
+
+// Route to insert order data
+app.post('/:id/orders', (req, res) => {
+    const iduser = req.params.id;
+    // const { idrest, totalAmount, status, created_at, items } = req.body;
+    const values = [
+        iduser,
+        req.body.idrest,
+        req.body.totalAmount,
+        req.body.status,
+        req.body.created_at,
+    ];
+
+    const items = req.body.items
+
+    // Insert into the 'order' table
+    const orderQuery = 'INSERT INTO `order` (`iduser`, `idrest`, `totalAmount`, `status`, `created_at`) VALUES (?)';
+    db.query(orderQuery, [values], (err, result) => {
+        if (err) {
+            console.error('Error inserting order:', err);
+            return res.status(500).send('Error inserting order');
+        }
+
+        const orderId = result.insertId;
+
+
+        const itemsQueryBase = 'INSERT INTO `order_items`( `idorder`, `idfood`, `quantity`, `price`, `foodName`) VALUES ';
+
+        const itemsValues = items.map((item) => [orderId, item.idfood, item.quantity, item.price, item.foodName]);
+
+        // Create a placeholder string for each set of values
+        const placeholders = itemsValues.map(() => '(?, ?, ?, ?, ?)').join(', ');
+
+        // Flatten the itemsValues array
+        const flattenedValues = itemsValues.flat();
+
+        const itemsQuery = itemsQueryBase + placeholders;
+
+        db.query(itemsQuery, flattenedValues, (err, result) => {
+            if (err) {
+                console.error('Error inserting order items:', err);
+                return res.status(500).send('Error inserting order items');
+            }
+
+            res.status(200).send('Order inserted successfully');
+        });
+    });
+});
+
+
+// Route to fetch order history for a customer
+// Route to fetch order history for a customer
+app.get('/:id/ordersHistory', (req, res) => {
+    const customerId = req.params.id;
+
+    const query = `
+      SELECT o.idorder, o.iduser, o.idrest, o.totalAmount, o.status, o.created_at, oi.idorder_items, oi.idfood, oi.quantity, oi.price, oi.foodName
+      FROM order_items oi
+      JOIN \`order\` o ON oi.idorder = o.idorder
+      WHERE o.iduser = ?
+    `;
+
+    db.query(query, [customerId], (err, results) => {
+        if (err) {
+            console.error('Error fetching order history:', err);
+            return res.status(500).send('Error fetching order history');
+        }
+
+        const orders = [];
+
+        results.forEach((result) => {
+            const existingOrder = orders.find((order) => order.idorder === result.idorder);
+
+            if (existingOrder) {
+                existingOrder.items.push({
+                    idorder_items: result.idorder_items,
+                    idfood: result.idfood,
+                    quantity: result.quantity,
+                    price: result.price,
+                    foodName: result.foodName
+                });
+            } else {
+                orders.push({
+                    idorder: result.idorder,
+                    iduser: result.iduser,
+                    idrest: result.idrest,
+                    totalAmount: result.totalAmount,
+                    status: result.status,
+                    created_at: result.created_at,
+                    items: [
+                        {
+                            idorder_items: result.idorder_items,
+                            idfood: result.idfood,
+                            quantity: result.quantity,
+                            price: result.price,
+                            foodName: result.foodName
+                        },
+                    ],
+                });
+            }
+        });
+
+        res.json(orders);
+    });
+});
+
+//feedback
+app.post('/orders/:orderId/feedback', async (req, res) => {
+    const orderId = req.params.orderId;
+    const values = [
+        orderId,
+        req.body.feedback,
+        5
+    ]
+
+    const q = 'INSERT INTO `feedback` (`idorder`, `feedback_text`, `rating`) VALUES (?)';
+    db.query(q, [values], (err, data) => {
+        if (err) return res.json(err)
+        console.log(data)
+        return res.json("Feedback has been created successfully");
+    });
+});;
+
 
 app.listen(8800, () => {
     console.log("Connect to backend!")
 })
+

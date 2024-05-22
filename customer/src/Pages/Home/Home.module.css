@@ -8,7 +8,7 @@
   }
   
   .list li a {
-    height: 22.5rem;
+    height: 23.5rem;
     width: 20rem;
     border: 1px solid whitesmoke;
     border-radius: 1rem;
@@ -32,12 +32,27 @@
     height: 7rem;
   }
 
-  .stars {
-    margin-top: 0.3rem;
-    padding: 0.5rem 1rem;
-    position: relative;
-    text-align: right;
+ .footerBox div{
+  font-weight: bold;
+ }
+  
+  .footerBox {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-top: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .distance {
     font-weight: bold;
+    margin-right: 10px; /* Adjust the spacing between elements as needed */
+  }
+  
+  .stars {
+    font-weight: bold;
+    margin-left: auto; /* Push the stars element to the right */
   }
   
   .name {
@@ -110,4 +125,20 @@ select {
 .searchContainer button:hover {
   opacity: 1;
   cursor: pointer;
+}
+
+.sortByLocationButton {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #7d6c09; /* Green color for emphasis */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px; /* Add margin top to create space */
+  margin-left: 110px; /* Add margin left to create space from the left side */
+  margin-bottom: 10px;
+}
+
+.sortByLocationButton:hover {
+  background-color: #218838; /* Darker green on hover */
 }

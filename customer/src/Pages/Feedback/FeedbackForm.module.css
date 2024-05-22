@@ -1,0 +1,63 @@
+/* FeedbackForm.module.css */
+
+.feedbackFormContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Set a higher z-index value */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedbackForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ratingContainer,
+  .textAreaContainer {
+    margin-bottom: 15px;
+  }
+  
+  .ratingContainer label,
+  .textAreaContainer label {
+    margin-bottom: 5px;
+  }
+  
+  .submitButton {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #45a049;
+  }
+
+  .starContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .starActive {
+    color: #ffc107;
+    cursor: pointer;
+  }
+  
+  .starInactive {
+    color: #e8e8e8;
+    cursor: pointer;
+  }
+  

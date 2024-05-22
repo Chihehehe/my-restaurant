@@ -1,0 +1,100 @@
+.orderHistory {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #d3e8d4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .orderHistory h1 {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .order {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .order:hover {
+    background: #eef9eb;
+    transform: scale(1.02);
+  }
+  
+  .orderDetails {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #f9f9f9;
+  }
+  
+  .order strong {
+    color: #555;
+  }
+  
+  .order div {
+    margin-bottom: 10px;
+  }
+  
+  .status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    text-transform: capitalize;
+  }
+  
+  .status.pending {
+    background-color: #ffecb3;
+    color: #ff9800;
+  }
+  
+  .status.completed {
+    background-color: rgb(224, 219, 219);
+    color: rgba(0, 0, 0, 0.696);
+  }
+  
+  .status.cancelled {
+    background-color: #ffcdd2;
+    color: #f44336;
+  }
+  
+  .feedbackButton,
+  .receiptButton {
+    background-color: #327f11; /* Primary color */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+  }
+  
+  .feedbackButton:hover,
+  .receiptButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .errorMessage {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

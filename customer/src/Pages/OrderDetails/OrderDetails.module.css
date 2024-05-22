@@ -1,0 +1,16 @@
+.orderDetails {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #f9f9f9;
+  }
+  
+  .orderDetails div {
+    margin-bottom: 10px;
+  }
+  
+  .orderDetails strong {
+    color: #333;
+  }
+  

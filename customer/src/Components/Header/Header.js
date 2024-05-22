@@ -44,7 +44,7 @@ export default function Header({size}) {
                                 <Link to={`/${id}/profile`}>{user.name}</Link>
                                 <div className={classes.menu}>
                                     <Link to={`/${id}/profile`}>Profile</Link>
-                                    <Link to={`/${id}/Orders`}>Orders</Link>
+                                    <Link to={`/${id}/OrderHistory`}>Orders</Link>
                                     <Link to={`/${id}/membership`}>Membership</Link>
                                     <a onClick={logout}>Log out</a>
                                 </div>

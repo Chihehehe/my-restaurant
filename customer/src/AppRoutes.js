@@ -6,6 +6,7 @@ import CartPage from './Pages/Cart/CartPage';
 import CheckoutPage from './Pages/Checkout/CheckoutPage';
 import MembershipPage from './Pages/Membership/Membership';
 import ProfilePage from './Pages/Profile/ProfilePage';
+import OrderHistory from './Pages/OrderHistory/OrderHistory';
 
 function AppRoutes({ handleClick, cart, setCart, handleChange }) {
 
@@ -17,6 +18,7 @@ function AppRoutes({ handleClick, cart, setCart, handleChange }) {
       <Route path="/checkout" element={<CheckoutPage />} /> {/* Pass id parameter to CheckoutPage */}
       <Route path="/membership" element={<MembershipPage />} /> {/* Add the route for MembershipPage */}
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/orderHistory" element={<OrderHistory />} />
     </Routes>
   );
 }
