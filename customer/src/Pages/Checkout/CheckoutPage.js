@@ -43,6 +43,7 @@ function CheckoutPage() {
 
   if (user.membership) {
     totalServiceFee -= serviceFee * membershipDiscount;
+    membershipMessage = <span className={classes.membershipApplied}>20% off applied</span>;
   } else {
     membershipMessage = <span className={classes.membershipMessage}>Become a member to receive 20% off on service fee</span>;
   }

@@ -108,8 +108,6 @@ app.get("/:id", (req, res) => {
 
 
 
-
-
 //For customer
 app.get("/customer/:id", (req, res) => {
     const userId = req.params.id;

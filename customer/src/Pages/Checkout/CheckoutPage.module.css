@@ -141,4 +141,9 @@ ul {
     background: #275a17;
 }
 
+.membershipApplied {
+    color: green;
+    font-weight: bold;
+  }
+
 
