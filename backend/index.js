@@ -155,6 +155,40 @@ app.get('/:id/restaurants/:idrestaurant/menu', (req, res) => {
     });
 });
 
+app.put('/customer/:id/membership', (req, res) => {
+    const userId = req.params.id;
+    const { membership } = req.body;
+  
+    const sql = 'UPDATE customer SET membership = ? WHERE idCustomer = ?';
+    db.query(sql, [membership, userId], (err, result) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.send({ success: true, message: 'Membership updated successfully' });
+    });
+  });
+
+  // Update customer details
+  app.put('/customer/:id', (req, res) => {
+    const { id } = req.params;
+    const values = [
+      req.body.name,
+      req.body.phone,
+      req.body.gmail,
+      id // Add the id parameter to the values array
+    ];
+  
+    const query = 'UPDATE customer SET name = ?, phone = ?, gmail = ? WHERE (idCustomer = ?)';
+  
+    db.query(query, values, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Database error' });
+      }
+      res.status(200).json({ message: 'Customer details updated successfully' });
+    });
+  });
+
 app.listen(8800, () => {
     console.log("Connect to backend!")
 })

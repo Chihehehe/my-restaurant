@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/Home/HomePage';
 import Restaurant from './Pages/Restaurant/Restaurant';
 import CartPage from './Pages/Cart/CartPage';
 import CheckoutPage from './Pages/Checkout/CheckoutPage';
+import MembershipPage from './Pages/Membership/Membership';
+import ProfilePage from './Pages/Profile/ProfilePage';
 
 function AppRoutes({ handleClick, cart, setCart, handleChange }) {
 
@@ -15,6 +15,8 @@ function AppRoutes({ handleClick, cart, setCart, handleChange }) {
       <Route path="/restaurants/:idrestaurant" element={<Restaurant handleClick={handleClick} />} />
       <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} handleChange = {handleChange} />} />
       <Route path="/checkout" element={<CheckoutPage />} /> {/* Pass id parameter to CheckoutPage */}
+      <Route path="/membership" element={<MembershipPage />} /> {/* Add the route for MembershipPage */}
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }

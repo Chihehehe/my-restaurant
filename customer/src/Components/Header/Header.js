@@ -41,10 +41,11 @@ export default function Header({size}) {
                     {
                         user ? (
                             <li className={classes.menu_container}>
-                                <Link to="/profile">{user.name}</Link>
+                                <Link to={`/${id}/profile`}>{user.name}</Link>
                                 <div className={classes.menu}>
-                                    <Link to="/profile">Profile</Link>
-                                    <Link to="/orders">Orders</Link>
+                                    <Link to={`/${id}/profile`}>Profile</Link>
+                                    <Link to={`/${id}/Orders`}>Orders</Link>
+                                    <Link to={`/${id}/membership`}>Membership</Link>
                                     <a onClick={logout}>Log out</a>
                                 </div>
                             </li>

@@ -1,0 +1,84 @@
+/* MembershipPage.module.css */
+
+.membershipContainer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #d3e8d4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(85, 15, 15, 0.1);
+    text-align: center;
+  }
+  
+  .membershipContainer h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .membershipDetails,
+  .membershipPromotion {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .membershipDetails h2,
+  .membershipPromotion h2 {
+    color: #444;
+    margin-bottom: 15px;
+  }
+  
+  .membershipDetails p,
+  .membershipPromotion p {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .membershipDetails ul,
+  .membershipPromotion ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .membershipDetails li,
+  .membershipPromotion li {
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  .paymentForm {
+    margin-top: 20px;
+  }
+  
+  .paymentForm input {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .joinButton {
+    background: #126a12;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .joinButton:hover {
+    background: #918616;
+  }
+
+  .promotionPrice {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.membershipDetails h2 {
+  color: pi;
+}

@@ -62,4 +62,83 @@ ul {
     margin-top: 5px;
     color: #777;
 }
+.totalPrice {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.fees, .discounts, .subtotal{
+    margin-top: 20px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+.fees span, .discounts span {
+    display: block;
+    margin-top: 5px;
+}
+
+.paymentSection {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.paymentSection h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.paymentForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.paymentForm label {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.paymentForm input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.paymentForm .cardDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paymentForm .cardDetails input {
+    width: 48%;
+}
+
+.checkoutButton {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #32711f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.membershipMessage {
+    color: green;
+    font-weight: bold;
+  }
+
+.checkoutButton:hover {
+    background: #275a17;
+}
+
 
