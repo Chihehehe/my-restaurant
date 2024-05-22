@@ -20,6 +20,23 @@ app.get("/", (req, res) => {
     res.json("hello this is the backend")
 })
 
+//function calculate distance
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of the earth in km
+    const dLat = deg2rad(lat2 - lat1); // deg2rad below
+    const dLon = deg2rad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c; // Distance in km
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+
 //For restaurant
 app.get("/restpage", (req, res) => {
     const q = "SELECT * FROM restaurant"
@@ -121,13 +138,41 @@ app.get("/customer/:id", (req, res) => {
     });
 });
 
-app.get("/:id/restaurants", (req, res) => {
-    const q = "SELECT * FROM restaurant"
-    db.query(q, (err, data) => {
-        if (err) return res.json(err)
-        return res.json(data)
-    })
-})
+app.get("/customer/:id/restaurants", (req, res) => {
+    const userId = req.params.id;
+    const qCustomer = "SELECT * FROM customer WHERE idCustomer = ?";
+    
+    db.query(qCustomer, [userId], (err, customerData) => {
+      if (err) {
+        console.error('Error fetching customer:', err);
+        return res.json(err);
+      }
+      const customer = customerData[0];
+      const qRestaurants = "SELECT * FROM restaurant";
+      
+      db.query(qRestaurants, (err, restaurantData) => {
+        if (err) {
+          console.error('Error fetching restaurants:', err);
+          return res.json(err);
+        }
+        
+        const enhancedRestaurants = restaurantData.map(restaurant => {
+          const distance = getDistanceFromLatLonInKm(
+            customer.custLat,
+            customer.custLon,
+            restaurant.lat,
+            restaurant.lon
+          );
+          return {
+            ...restaurant,
+            distance
+          };
+        });
+        
+        return res.json(enhancedRestaurants);
+      });
+    });
+  });
 
 app.get("/:id/restaurants/:idrestaurant", (req, res) => {
     const idrestaurant = req.params.idrestaurant;
