@@ -3,53 +3,6 @@ import { Space, Typography } from "antd";
 import axios from 'axios';
 
 
-//
-// function EditMenu() {
-//     const [dataSource, setDataSource] = useState([]);
-//     const [loading, setLoading] = useState(false);
-
-//     useEffect(() => {
-//         setLoading(true)
-//         getMenu().then((res) => {
-//             setDataSource(res.food);
-//             setLoading(false);
-//         })
-//     }, [])
-// }
-
-// function ProductList(loading, dataSource) {
-//     return (
-//         <Space size={20} direction='vertical'>
-//             <Typography.Title level={4}>Menu</Typography.Title>
-//             <Table
-//                 columns={[
-//                 {
-//                     title: "Title",
-//                     dataIndex: "title",
-//                 },
-//                 {
-//                     title: "Description",
-//                     dataIndex: "description",
-//                 },
-//                 {
-//                     title: "Price",
-//                     dataIndex: "price",
-//                 },
-//                 {
-//                     title: "Category",
-//                     dataIndex: "category",
-//                 },
-//                 ]}
-//                 loading={loading}
-//                 dataSource={dataSource}
-//                 pagination={{
-//                     pageSize:3,
-//                 }}
-//             ></Table>
-//         </Space>
-//     );
-// }
-
 function EditMenu() {
     const [content, setContent] = useState(<MenuList showForm={showForm} />);
 
