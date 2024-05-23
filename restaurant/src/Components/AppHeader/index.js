@@ -1,7 +1,8 @@
 import { Image, Typography, Space, Badge } from "antd";
 import { BellFilled } from "@ant-design/icons";
 
-function AppHeader() {
+function AppHeader({id}) {
+    console.log(id)
     return (
         <div className="AppHeader">
             <Image width={60} src={require('./logo.PNG')} />

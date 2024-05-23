@@ -3,7 +3,7 @@ import { Space, Typography } from "antd";
 import axios from 'axios';
 
 
-function EditMenu() {
+function EditMenu({ id }) {
     const [content, setContent] = useState(<MenuList showForm={showForm} />);
 
     function showList() {
@@ -27,7 +27,8 @@ function MenuList(props) {
     useEffect(() => {
         const fetchAllFood = async () => {
             try {
-                const res = await axios.get("http://localhost:8800/editmenu")
+                const res = await axios.get(`http://localhost:8800/editmenu/102`)
+                console.log(res.data)
                 setfood(res.data);
             } catch (err) {
                 console.log(err)
@@ -35,6 +36,7 @@ function MenuList(props) {
         }
         fetchAllFood()
     }, []);
+
 
     //handle delete
     const handleDelete = async (idmenu) => {
@@ -66,11 +68,11 @@ function MenuList(props) {
                     {
                         food.map((food, index) => {
                             return (
-                                <tr key={index}>
+                                <tr key={index.idmenu}>
                                     <td>{food.foodName}</td>
                                     <td>{food.desc}</td>
                                     <td>{food.price}$</td>
-                                    <td>{food.image && <img src={food.image} alt="" width = "150" height="90" />}</td>
+                                    <td>{food.image && <img src={food.image} alt="" width="150" height="90" />}</td>
                                     <td style={{ width: "10px", whiteSpace: "nowrap" }}>
                                         <button type='button' className='btn btn-primary btn-sm me 2'>Edit</button>
                                         <button type='button' className='btn btn-danger btn-sm' onClick={() => handleDelete(food.idmenu)}>Delete</button>

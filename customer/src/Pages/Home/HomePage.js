@@ -13,7 +13,7 @@ const HomePage = () => {
     const [user, setUser] = useState(null);
     const { id } = useParams();
     const [originalRestaurants, setOriginalRestaurants] = useState([]);
-
+  
     useEffect(() => {
         axios.get(`http://localhost:8800/customer/${id}`)
             .then((res) => {

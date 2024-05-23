@@ -38,17 +38,29 @@ function deg2rad(deg) {
 }
 
 //For restaurant
-app.get("/restpage", (req, res) => {
-    const q = "SELECT * FROM restaurant"
-    db.query(q, (err, data) => {
+app.get("/restpage/:id", (req, res) => {
+    const idrest = req.params.id;
+    const q = "SELECT * FROM `restaurant` WHERE idrestaurant = ?"
+    db.query(q, idrest, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
     })
 })
 
-app.get("/editmenu", (req, res) => {
-    const q = "SELECT * FROM menu"
-    db.query(q, (err, data) => {
+app.get("/restpage/:id/orderRequest", (req, res) => {
+    const idrest = req.params.id;
+    const q = "SELECT * FROM `order` WHERE idrest = ?"
+    db.query(q, idrest, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+app.get("/editmenu/:id", (req, res) => {
+    const id = req.params.id;
+
+    const q = "SELECT * FROM menu WHERE idRest= 102"
+    db.query(q, id, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
     })

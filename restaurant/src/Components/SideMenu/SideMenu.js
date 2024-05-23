@@ -2,7 +2,7 @@ import { Menu } from "antd"
 import { EditOutlined, FieldTimeOutlined, ShopOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 
-function SideMenu() {
+function SideMenu( {id} ) {
     const navigate = useNavigate()
     return (
         <div className="SideMenu">
@@ -15,17 +15,17 @@ function SideMenu() {
                 items={[{
                     label: "Orders",
                     icon: <FieldTimeOutlined />,
-                    key: "/"
+                    key: `/${id}`
                 },
                 {
                     label: "Edit menu",
                     icon: <EditOutlined />,
-                    key: "/editmenu"
+                    key: `/${id}/editmenu`
                 },
                 {
                     label: "Manage Information",
                     icon: <ShopOutlined />,
-                    key: "/manageinfo"
+                    key: `/${id}/manageinfo`
                 }]}>
 
             </Menu>
