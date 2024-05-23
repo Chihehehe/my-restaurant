@@ -27,7 +27,7 @@ function MenuList(props) {
     useEffect(() => {
         const fetchAllFood = async () => {
             try {
-                const res = await axios.get(`http://localhost:8800/editmenu/102`)
+                const res = await axios.get(`http://localhost:8800/editmenu/110`)
                 console.log(res.data)
                 setfood(res.data);
             } catch (err) {
@@ -41,7 +41,7 @@ function MenuList(props) {
     //handle delete
     const handleDelete = async (idmenu) => {
         try {
-            await axios.delete("http://localhost:8800/editmenu/" + idmenu)
+            await axios.delete("http://localhost:8800/editmenu/110", idmenu)
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -89,6 +89,7 @@ function MenuList(props) {
 }
 
 function MenuForm(props) {
+    const {id} = props;
     const [food, setfood] = useState({
         foodName: "",
         desc: "",
@@ -104,7 +105,8 @@ function MenuForm(props) {
     const handleClick = async e => {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:8800/editmenu", food)
+            await axios.post("http://localhost:8800/editmenu/add/110", food)
+            console.log(id)
             alert("Adding food successfully")
         } catch (error) {
             console.log(error)

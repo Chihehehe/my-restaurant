@@ -59,22 +59,46 @@ app.get("/restpage/:id/orderRequest", (req, res) => {
 app.get("/editmenu/:id", (req, res) => {
     const id = req.params.id;
 
-    const q = "SELECT * FROM menu WHERE idRest= 102"
+    const q = "SELECT * FROM menu WHERE idRest= 110"
     db.query(q, id, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
     })
 })
 
+app.get("/orders/:id/items", (req, res) => {
+    const id = req.params.id;
+
+    const q = "SELECT * FROM `order_items` WHERE idorder = ?"
+    db.query(q, id, (err, data) => {
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+app.put('/restPage/:id/status', (req, res) => {
+    const userId = req.params.id;
+    const { status } = req.body;
+
+    const sql = 'UPDATE `order` SET status = ? WHERE idorder = ?';
+    db.query(sql, [status, userId], (err, result) => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        res.send({ success: true, message: 'Status updated successfully' });
+    });
+});
 
 
-app.post("/editmenu", (req, res) => {
-    const q = "INSERT INTO menu (`foodName`, `desc`, `price`, `image`) VALUES (?)"
+app.post("/editmenu/add/:id", (req, res) => {
+    const id = req.params;
+    const q = "INSERT INTO menu (`foodName`, `desc`, `price`, `image`, `id`) VALUES (?)"
     const values = [
         req.body.foodName,
         req.body.desc,
         req.body.price,
-        req.body.image
+        req.body.image,
+        id
     ];
 
     db.query(q, [values], (err, data) => {

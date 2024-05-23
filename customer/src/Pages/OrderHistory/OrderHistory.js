@@ -39,6 +39,8 @@ const OrderHistory = () => {
         return styles.completed;
       case 'cancelled':
         return styles.cancelled;
+      case 'accepted':
+        return styles.accepted;
       default:
         return '';
     }

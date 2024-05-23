@@ -8,7 +8,7 @@ function AppRoutes( {id}) {
     console.log(id)
     return (
         <Routes>
-            <Route path="/" element={<Orders />}></Route>
+            <Route path="/" element={<Orders id={id} />}></Route>
             <Route path="/editmenu" element={<EditMenu id ={id}/>}></Route>
             <Route path="/manageinfo" element={<ManageInfo />}></Route>
         </Routes>

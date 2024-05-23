@@ -65,6 +65,11 @@
     background-color: rgb(224, 219, 219);
     color: rgba(0, 0, 0, 0.696);
   }
+
+  .status.accepted {
+    background-color: rgb(145, 237, 122);
+    color: rgba(16, 118, 47, 0.696);
+  }
   
   .status.cancelled {
     background-color: #ffcdd2;

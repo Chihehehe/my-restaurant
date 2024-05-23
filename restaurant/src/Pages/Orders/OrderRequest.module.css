@@ -1,0 +1,131 @@
+.orderRequest {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .orderRow {
+    transition: background-color 0.3s ease;
+  }
+  
+  .orderRow:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .pending {
+    color: orange;
+    font-weight: bold;
+  }
+  
+  .accepted {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .completed {
+    color: blue;
+    font-weight: bold;
+  }
+  
+  .cancelled {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .acceptButton {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .acceptButton:hover {
+    background-color: #218838;
+  }
+  
+  .cancelButton {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .cancelButton:hover {
+    background-color: #c82333;
+  }
+  
+  .completeButton {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .completeButton:hover {
+    background-color: #0069d9;
+  }
+  
+  .detailsButton {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .detailsButton:hover {
+    background-color: #5a6268;
+  }
+  
+  .innerTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .innerTable th, .innerTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .innerTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .orderDetailsRow {
+    background-color: #f8f8f8;
+  }
+  
