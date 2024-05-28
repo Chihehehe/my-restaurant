@@ -80,6 +80,9 @@ const OrderHistory = () => {
             <strong>Total Amount:</strong> ${order.totalAmount}<br />
             <strong>Status:</strong> <span className={`${styles.status} ${getStatusClass(order.status)}`}>{order.status}</span><br />
             <strong>Created At:</strong> {new Date(order.created_at).toLocaleString()}
+            {order.status.toLowerCase() === 'cancelled' && (
+              <span className={styles.cancelledMessage}> - Your money will be refunded</span>
+            )}
             {order.status.toLowerCase() === 'completed' && (
               <>
                 <button

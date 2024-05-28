@@ -39,14 +39,14 @@ function Login() {
     }
 
   return (
-    <div className='d-flex justify-content-center align-items-center bg-success vh-100'>
-        <div className='bg-white p-3 rounded w-25'>
-            <h2>Log in</h2>
+    <div className='d-flex justify-content-center align-items-center vh-100' style={{ backgroundColor: '#E8F1E8' }}>
+        <div className='p-3 rounded w-25' style={{ backgroundColor: '#E8F1E8' }}>
+            <h2>Log in to Eatme-Feedme</h2>
             <form action='' onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlFor='email'><strong>Email</strong></label>
                     <input type="email" placeholder='Enter Email' name='email'
-                    onChange={handleInput} className='form-control rounded-0'/>
+                    onChange={handleInput} className='form-control rounded-0' style={{ border: '1px solid #ced4da' }}/>
                     {errors.email && <span className='text-danger'> {errors.email}</span>}
                 </div>
                 <div className='mb-3'>

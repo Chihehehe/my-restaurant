@@ -5,8 +5,9 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Restaurant from '../../Pages/Restaurant/Restaurant';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Image } from '@chakra-ui/react';
 
-export default function Header({size}) {
+export default function Header({ size }) {
     // const user = {
     //     name: 'Chi',
     // };
@@ -34,7 +35,7 @@ export default function Header({size}) {
     return <header className={classes.header}>
         <div className={classes.container}>
             <Link to={`/${id}`} className={classes.logo}>
-                FoodMine!
+                <Image width={35} height={35} src={require('./applogo.png')} />
             </Link>
             <nav>
                 <ul>

@@ -65,10 +65,10 @@ a:link {
   } 
 
 .categoryBar {
-    padding-top: 20px;
+    padding-top: 10px;
     width: 300px; /* Set the width of the container */
     margin: 0 auto; /* Center the container horizontally */
-    margin-bottom: 30px;
+    margin-bottom: 8px;
 }
 
 .sortByPriceContainer {
@@ -93,8 +93,8 @@ select {
 .searchContainer {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .searchContainer input {

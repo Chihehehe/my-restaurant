@@ -26,7 +26,8 @@ function SideMenu( {id} ) {
                     label: "Manage Information",
                     icon: <ShopOutlined />,
                     key: `/${id}/manageinfo`
-                }]}>
+                },
+                ]} >
 
             </Menu>
         </div>

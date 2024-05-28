@@ -91,8 +91,8 @@ app.put('/restPage/:id/status', (req, res) => {
 
 
 app.post("/editmenu/add/:id", (req, res) => {
-    const id = req.params;
-    const q = "INSERT INTO menu (`foodName`, `desc`, `price`, `image`, `id`) VALUES (?)"
+    const id = 110;
+    const q = "INSERT INTO menu (`foodName`, `desc`, `price`, `image`, `idrest`) VALUES (?)"
     const values = [
         req.body.foodName,
         req.body.desc,
@@ -107,11 +107,12 @@ app.post("/editmenu/add/:id", (req, res) => {
     });
 });
 
-app.delete("/editmenu/:idmenu", (req, res) => {
+app.delete("/editmenu/:id/:idmenu", (req, res) => {
+    const rest = 110;
     const menuId = req.params.idmenu;
-    const q = "DELETE FROM menu WHERE idmenu = ?"
+    const q = "DELETE FROM menu WHERE idmenu = ? and idRest = ?"
 
-    db.query(q, [menuId], (err, data) => {
+    db.query(q, [menuId, rest], (err, data) => {
         if (err) return res.json(err);
         return res.json("Food has been deleted successfully");
     });
@@ -259,6 +260,28 @@ app.put('/customer/:id', (req, res) => {
     ];
 
     const query = 'UPDATE customer SET name = ?, phone = ?, gmail = ? WHERE (idCustomer = ?)';
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.status(200).json({ message: 'Customer details updated successfully' });
+    });
+});
+
+app.put('/restpage/:id', (req, res) => {
+    const { id } = req.params;
+    const values = [
+        req.body.restname,
+        req.body.addressRes,
+        req.body.image,
+        req.body.category,
+        req.body.gmail,
+        id // Add the id parameter to the values array
+    ];
+
+    const query = 'UPDATE restaurant SET restname = ?, addressRes = ?, image = ?, category = ? , gmail = ? WHERE (idCustomer = ?)';
 
     db.query(query, values, (err, result) => {
         if (err) {

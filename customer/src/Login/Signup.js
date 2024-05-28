@@ -42,8 +42,8 @@ function Signup() {
     }
 
   return (
-    <div className='d-flex justify-content-center align-items-center bg-success vh-100'>
-        <div className='bg-white p-3 rounded w-25'>
+    <div className='d-flex justify-content-center align-items-center vh-100'  style={{ backgroundColor: '#E8F1E8' }}>
+        <div className='p-3 rounded w-25'  style={{ backgroundColor: '#E8F1E8' }}>
             <h2>Sign up</h2>
             <form action='' onSubmit={handleSubmit}>
                 <div className='mb-3'>

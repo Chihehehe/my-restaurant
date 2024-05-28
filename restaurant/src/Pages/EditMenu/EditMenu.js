@@ -41,7 +41,7 @@ function MenuList(props) {
     //handle delete
     const handleDelete = async (idmenu) => {
         try {
-            await axios.delete("http://localhost:8800/editmenu/110", idmenu)
+            await axios.delete(`http://localhost:8800/editmenu/110/${idmenu}`)
             window.location.reload()
         } catch (err) {
             console.log(err)
@@ -74,7 +74,6 @@ function MenuList(props) {
                                     <td>{food.price}$</td>
                                     <td>{food.image && <img src={food.image} alt="" width="150" height="90" />}</td>
                                     <td style={{ width: "10px", whiteSpace: "nowrap" }}>
-                                        <button type='button' className='btn btn-primary btn-sm me 2'>Edit</button>
                                         <button type='button' className='btn btn-danger btn-sm' onClick={() => handleDelete(food.idmenu)}>Delete</button>
                                     </td>
                                 </tr>

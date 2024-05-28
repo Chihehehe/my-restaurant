@@ -80,28 +80,32 @@ const OrderRequest = ({ id }) => {
 
   const expandedRowRender = (orderItems) => {
     return (
-      <table className={styles.innerTable}>
-        <thead>
-          <tr>
-            <th>Item ID</th>
-            <th>Food Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {orderItems.map(item => (
-            <tr key={item.idorder_items}>
-              <td>{item.idorder_items}</td>
-              <td>{item.foodName}</td>
-              <td>{item.quantity}</td>
-              <td>${item.price.toFixed(2)}</td>
+      <div>
+        <p>Customer: Evelyn</p>
+        <table className={styles.innerTable}>
+          <thead>
+            <tr>
+              <th>Item ID</th>
+              <th>Food Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {orderItems.map(item => (
+              <tr key={item.idorder_items}>
+                <td>{item.idorder_items}</td>
+                <td>{item.foodName}</td>
+                <td>{item.quantity}</td>
+                <td>${item.price.toFixed(2)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   };
+  
 
   const getStatusClass = (status) => {
     switch (status.toLowerCase()) {
