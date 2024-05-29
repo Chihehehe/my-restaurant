@@ -31,36 +31,8 @@ Before you begin, ensure you have met the following requirements:
     npm install
     ```
 
-3. Set up your MySQL database and configure the connection in the `index.js` file. Here is the backend code:
+3. Set up your MySQL database and configure the connection in the `index.js` file which is already in 'backend' folder. To set up MySQL database, scroll to the end of this file
 
-    ```javascript
-    import express from "express";
-    import mysql from "mysql";
-    import cors from "cors";
-
-    const app = express();
-
-    const db = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "password",
-        database: "myrestaurant"
-    });
-
-    app.use(express.json());
-    app.use(cors());
-
-    app.get("/", (req, res) => {
-        res.json("hello this is the backend");
-    });
-
-    // Additional endpoints as needed
-
-    const port = 8800;
-    app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-    });
-    ```
 
 ### Customer Site
 
