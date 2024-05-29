@@ -118,6 +118,10 @@ Before you begin, ensure you have met the following requirements:
     ```
 3. Open your browser and navigate to `http://localhost:3000`.
 
+4. Log in with the following credentials:
+    - **Username**: `khanhlinhng114@gmail.com`
+    - **Password**: `110404`
+
 ### Restaurant Site
 
 1. Navigate to the `restaurant` directory:
@@ -132,7 +136,7 @@ Before you begin, ensure you have met the following requirements:
     ```bash
     yarn start
     ```
-3. Open your browser and navigate to `http://localhost:3001`.
+3. Open your browser and navigate to `http://localhost:3001/110`.
 
 ## Browser Compatibility
 
